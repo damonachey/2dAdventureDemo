@@ -10,6 +10,7 @@ var lastTime = 0;
 function update(deltaTime) {
     // Game logic updates go here
     state.update(deltaTime);
+    world.update(deltaTime);
     statistics.update(deltaTime);
 }
 
@@ -19,15 +20,10 @@ function render() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Rendering code goes here
-    
-    // Render player
-    player.render(ctx, canvas);
-    
-    // Render grid overlay
-    grid.render(ctx, canvas);
-    
-    // Render FPS counter
-    statistics.render(ctx, canvas);
+    world.render(ctx, canvas); // Render world objects
+    player.render(ctx, canvas); // Render player
+    grid.render(ctx, canvas); // Render grid overlay
+    statistics.render(ctx, canvas); // Render statistics
 }
 
 function gameLoop(currentTime) {
@@ -39,6 +35,5 @@ function gameLoop(currentTime) {
     requestAnimationFrame(gameLoop);
 }
 
-// Hide cursor initially and start the game loop
-document.body.classList.add('hide-cursor');
+// Start the game loop
 requestAnimationFrame(gameLoop);

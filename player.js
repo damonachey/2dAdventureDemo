@@ -39,5 +39,12 @@ var player = {
         ctx.moveTo(screenX + 16, screenY + 32);
         ctx.lineTo(screenX + 24, screenY + 48);
         ctx.stroke();
+        
+        // Draw bounding box if enabled
+        if (showBoundingBoxes) {
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(screenX, screenY, this.width, this.height);
+        }
     }
 };
