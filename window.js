@@ -4,6 +4,10 @@ window.addEventListener('resize', function() {
     canvas.height = window.innerHeight;
 });
 
+// Track pressed keys for movement
+var keys = {};
+var pressedKeys = []; // Track all currently pressed keys for display
+
 // Handle keyboard events
 window.addEventListener('keydown', function(e) {
     var keyName = e.key === ' ' ? 'Space' : e.key;
@@ -30,6 +34,20 @@ window.addEventListener('keydown', function(e) {
         statistics.setCurrentKey(keyName);
     }
     
+    // Track arrow keys for movement
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        keys[e.key] = true;
+    }
+    
+    // Add key to pressed keys list if not already there
+    var displayKey = keyName;
+    if (pressedKeys.indexOf(displayKey) === -1) {
+        pressedKeys.push(displayKey);
+    }
+    
+    // Update statistics with all pressed keys
+    statistics.setCurrentKey(pressedKeys.join(', '));
+    
     // Handle CTRL+s to toggle statistics
     if (e.ctrlKey && e.key === 's') {
         e.preventDefault();
@@ -44,5 +62,18 @@ window.addEventListener('keydown', function(e) {
 });
 
 window.addEventListener('keyup', function(e) {
-    statistics.setCurrentKey('');
+    // Release arrow keys
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        keys[e.key] = false;
+    }
+    
+    // Remove key from pressed keys list
+    var keyName = e.key === ' ' ? 'Space' : e.key;
+    var index = pressedKeys.indexOf(keyName);
+    if (index > -1) {
+        pressedKeys.splice(index, 1);
+    }
+    
+    // Update statistics with remaining pressed keys
+    statistics.setCurrentKey(pressedKeys.length > 0 ? pressedKeys.join(', ') : '');
 });

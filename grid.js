@@ -18,11 +18,11 @@ var grid = {
         var cols = Math.ceil(canvas.width / this.squareSize);
         var rows = Math.ceil(canvas.height / this.squareSize);
 
-        // Calculate grid offset so (0,0) square's bottom-left is at world center
+        // Calculate grid offset based on player position (world moves, player stays centered)
         var centerScreenX = canvas.width / 2;
         var centerScreenY = canvas.height / 2;
-        var gridOffsetX = centerScreenX % this.squareSize;
-        var gridOffsetY = centerScreenY % this.squareSize;
+        var gridOffsetX = (centerScreenX - state.player.x) % this.squareSize;
+        var gridOffsetY = (centerScreenY + state.player.y) % this.squareSize;
 
         // Draw vertical lines (offset so (0,0) square aligns with world center)
         for (var x = 0; x <= cols; x++) {
@@ -48,17 +48,17 @@ var grid = {
                 var pixelX = x * this.squareSize + gridOffsetX + 2;
                 var pixelY = y * this.squareSize + gridOffsetY + 14;
                 
-                // Calculate world coordinates based on position relative to center
-                var worldX = Math.floor((pixelX - centerScreenX) / this.squareSize);
-                var worldY = Math.floor((centerScreenY - pixelY) / this.squareSize);
+                // Calculate world coordinates based on position relative to player
+                var worldX = Math.floor((pixelX - centerScreenX + state.player.x) / this.squareSize);
+                var worldY = Math.floor((centerScreenY - pixelY + state.player.y) / this.squareSize);
                 
                 ctx.fillText(worldX + ',' + worldY, pixelX, pixelY);
             }
         }
         
-        // Draw red X at world coordinates 0,0 for debugging
-        var centerPixelX = canvas.width / 2;
-        var centerPixelY = canvas.height / 2;
+        // Draw red X at world coordinates 0,0 for debugging (moves with world)
+        var centerPixelX = canvas.width / 2 - state.player.x;
+        var centerPixelY = canvas.height / 2 + state.player.y;
         
         ctx.strokeStyle = 'red';
         ctx.lineWidth = 3;

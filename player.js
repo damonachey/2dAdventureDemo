@@ -3,10 +3,9 @@ var player = {
     height: 48,
     
     render: function(ctx, canvas) {
-        // Convert world coordinates to screen coordinates
-        // World (0,0) = screen center, player coordinates are bottom-left of character
-        var screenX = (canvas.width / 2) + state.player.x;
-        var screenY = (canvas.height / 2) - state.player.y - this.height;
+        // Player stays centered on screen (world moves around player)
+        var screenX = (canvas.width / 2);
+        var screenY = (canvas.height / 2) - this.height;
         
         ctx.strokeStyle = 'white';
         ctx.lineWidth = 2;
