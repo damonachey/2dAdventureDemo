@@ -21,20 +21,20 @@ Grass.prototype.render = function(ctx, canvas) {
     // Draw grass clumps from top-down view scattered across entire tile
     ctx.beginPath();
 
-    // Dense grass clump positions covering most of the 64x64 tile
+    // Sparser grass clump positions for cleaner look
     var grassClumps = [
         // Top row
-        {x: 8, y: 8}, {x: 16, y: 12}, {x: 24, y: 6}, {x: 32, y: 10}, {x: 40, y: 8}, {x: 48, y: 14}, {x: 56, y: 9},
+        {x: 12, y: 8}, {x: 28, y: 12}, {x: 44, y: 6}, {x: 58, y: 10},
         // Second row
-        {x: 6, y: 18}, {x: 14, y: 22}, {x: 22, y: 16}, {x: 30, y: 20}, {x: 38, y: 18}, {x: 46, y: 24}, {x: 54, y: 19}, {x: 58, y: 17},
+        {x: 8, y: 22}, {x: 24, y: 18}, {x: 40, y: 24}, {x: 54, y: 20},
         // Third row
-        {x: 10, y: 28}, {x: 18, y: 32}, {x: 26, y: 26}, {x: 34, y: 30}, {x: 42, y: 28}, {x: 50, y: 34}, {x: 58, y: 29},
+        {x: 16, y: 32}, {x: 32, y: 28}, {x: 48, y: 34}, {x: 60, y: 30},
         // Fourth row
-        {x: 4, y: 38}, {x: 12, y: 42}, {x: 20, y: 36}, {x: 28, y: 40}, {x: 36, y: 38}, {x: 44, y: 44}, {x: 52, y: 39}, {x: 60, y: 37},
+        {x: 6, y: 42}, {x: 22, y: 38}, {x: 38, y: 44}, {x: 52, y: 40},
         // Fifth row
-        {x: 8, y: 48}, {x: 16, y: 52}, {x: 24, y: 46}, {x: 32, y: 50}, {x: 40, y: 48}, {x: 48, y: 54}, {x: 56, y: 49},
+        {x: 14, y: 52}, {x: 30, y: 48}, {x: 46, y: 54}, {x: 58, y: 50},
         // Bottom row
-        {x: 6, y: 58}, {x: 14, y: 62}, {x: 22, y: 56}, {x: 30, y: 60}, {x: 38, y: 58}, {x: 46, y: 62}, {x: 54, y: 57}
+        {x: 10, y: 62}, {x: 26, y: 58}, {x: 42, y: 60}, {x: 56, y: 56}
     ];
 
     // Draw each grass clump as small radiating lines (top-down view)
