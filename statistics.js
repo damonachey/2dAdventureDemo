@@ -32,5 +32,13 @@ var statistics = {
         ctx.textAlign = 'left';
         ctx.fillText('FPS: ' + this.currentFps, 10, 30);
         ctx.fillText('Key: ' + this.currentKey, 10, 60);
+        ctx.fillText('Pos: ' + Math.round(state.player.x) + ',' + Math.round(state.player.y), 10, 90);
+        
+        // Calculate grid box based on player center (player is 32x48)
+        var playerCenterX = state.player.x + player.width / 2;
+        var playerCenterY = state.player.y + player.height / 2;
+        var gridX = Math.floor(playerCenterX / 64);
+        var gridY = Math.floor(playerCenterY / 64);
+        ctx.fillText('Grid: ' + gridX + ',' + gridY, 10, 120);
     }
 };
