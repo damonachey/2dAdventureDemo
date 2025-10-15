@@ -13,31 +13,26 @@ var state = {
         var originalX = this.player.x;
         var originalY = this.player.y;
         
-        // Try horizontal movement
-        if (keys['ArrowLeft']) {
+        // Move only in the current active direction
+        if (currentDirection === 'ArrowLeft') {
             this.player.x -= moveDistance;
             if (this.checkCollisions()) {
                 this.player.x = originalX; // Revert if collision
             }
         }
-        if (keys['ArrowRight']) {
+        else if (currentDirection === 'ArrowRight') {
             this.player.x += moveDistance;
             if (this.checkCollisions()) {
                 this.player.x = originalX; // Revert if collision
             }
         }
-        
-        // Update original position after horizontal movement
-        originalX = this.player.x;
-        
-        // Try vertical movement
-        if (keys['ArrowUp']) {
+        else if (currentDirection === 'ArrowUp') {
             this.player.y += moveDistance;
             if (this.checkCollisions()) {
                 this.player.y = originalY; // Revert if collision
             }
         }
-        if (keys['ArrowDown']) {
+        else if (currentDirection === 'ArrowDown') {
             this.player.y -= moveDistance;
             if (this.checkCollisions()) {
                 this.player.y = originalY; // Revert if collision
