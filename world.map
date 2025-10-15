@@ -2,13 +2,17 @@
    1,    1, Bush
    3,    1, Rock
    4,    1, Water
-   6,    1, Bridge
-   5,    2, NonExistent
+   6,    1, Bridge,     Traversable
+   5,    2, MissingTile
    7,    1, Grass
-   7,    2, Grass
+   7,    2, Grass,      Traversable
    4,    2, Water
-   4,    3, Water
    4,    4, Water
    4,    5, Water
    4,    6, Water
-   4,    3, Bridge
+   3,    2, Water
+   3,    4, Water
+   3,    5, Water
+   3,    6, Water
+   4,    3, Bridge,    Traversable
+   3,    3, Bridge,    Traversable

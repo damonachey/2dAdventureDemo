@@ -52,6 +52,12 @@ var state = {
         // Check collision with all world objects
         for (var i = 0; i < world.objects.length; i++) {
             var obj = world.objects[i];
+            
+            // Skip collision detection for traversable objects
+            if (obj.traversable) {
+                continue;
+            }
+            
             var objBox = {
                 x: obj.x,
                 y: obj.y,

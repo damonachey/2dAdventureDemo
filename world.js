@@ -60,15 +60,16 @@ var world = {
                     // Skip comments and empty lines
                     if (line.startsWith('#') || line === '') continue;
                     
-                    // Parse: x, y, Name
+                    // Parse: x, y, Name, [Traversable]
                     var parts = line.split(',');
                     if (parts.length >= 3) {
                         var x = parseInt(parts[0].trim()) * 64; // Convert grid to pixels
                         var y = parseInt(parts[1].trim()) * 64; // Convert grid to pixels
                         var objectName = parts[2].trim();
+                        var traversable = parts.length > 3 && parts[3].trim().toLowerCase() === 'traversable';
                         
                         uniqueTiles.add(objectName);
-                        objectsToCreate.push({ x: x, y: y, name: objectName });
+                        objectsToCreate.push({ x: x, y: y, name: objectName, traversable: traversable });
                     }
                 }
                 
@@ -83,6 +84,7 @@ var world = {
                         var objData = objectsToCreate[i];
                         var obj = this.createObject(objData.name, objData.x, objData.y);
                         if (obj) {
+                            obj.traversable = objData.traversable;
                             this.objects.push(obj);
                         }
                     }
