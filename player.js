@@ -1,6 +1,6 @@
 var player = {
     width: 32,
-    height: 48,
+    height: 32,
     
     render: function(ctx, canvas) {
         // Player stays centered on screen (world moves around player)
@@ -13,31 +13,31 @@ var player = {
         
         // Head (circle)
         ctx.beginPath();
-        ctx.arc(screenX + 16, screenY + 8, 6, 0, Math.PI * 2);
+        ctx.arc(screenX + 16, screenY + 6, 5, 0, Math.PI * 2);
         ctx.stroke();
         
         // Body (vertical line)
         ctx.beginPath();
-        ctx.moveTo(screenX + 16, screenY + 14);
-        ctx.lineTo(screenX + 16, screenY + 32);
+        ctx.moveTo(screenX + 16, screenY + 11);
+        ctx.lineTo(screenX + 16, screenY + 22);
         ctx.stroke();
         
         // Arms (horizontal line)
         ctx.beginPath();
-        ctx.moveTo(screenX + 8, screenY + 22);
-        ctx.lineTo(screenX + 24, screenY + 22);
+        ctx.moveTo(screenX + 8, screenY + 16);
+        ctx.lineTo(screenX + 24, screenY + 16);
         ctx.stroke();
         
         // Left leg
         ctx.beginPath();
-        ctx.moveTo(screenX + 16, screenY + 32);
-        ctx.lineTo(screenX + 8, screenY + 48);
+        ctx.moveTo(screenX + 16, screenY + 22);
+        ctx.lineTo(screenX + 10, screenY + 32);
         ctx.stroke();
         
         // Right leg
         ctx.beginPath();
-        ctx.moveTo(screenX + 16, screenY + 32);
-        ctx.lineTo(screenX + 24, screenY + 48);
+        ctx.moveTo(screenX + 16, screenY + 22);
+        ctx.lineTo(screenX + 22, screenY + 32);
         ctx.stroke();
         
         // Draw bounding box if enabled
