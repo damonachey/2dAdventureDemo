@@ -39,5 +39,6 @@ function gameLoop(currentTime) {
     requestAnimationFrame(gameLoop);
 }
 
-// Start the game loop
+// Hide cursor initially and start the game loop
+document.body.classList.add('hide-cursor');
 requestAnimationFrame(gameLoop);

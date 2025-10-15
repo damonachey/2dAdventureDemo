@@ -111,6 +111,9 @@ window.addEventListener('blur', function() {
     // Clear display keys
     pressedKeys = [];
     statistics.setCurrentKey('');
+    
+    // Show cursor when window loses focus
+    document.body.classList.remove('hide-cursor');
 });
 
 // Clear all keys when window regains focus (safety measure)
@@ -124,4 +127,7 @@ window.addEventListener('focus', function() {
     // Clear display keys
     pressedKeys = [];
     statistics.setCurrentKey('');
+    
+    // Hide cursor when window gains focus
+    document.body.classList.add('hide-cursor');
 });
