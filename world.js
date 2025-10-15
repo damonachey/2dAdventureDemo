@@ -5,36 +5,40 @@ var world = {
     tilesLoading: {},
     
     loadTileScript: function(tileName) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             // If already loaded, resolve immediately
             if (this.tilesLoaded[tileName]) {
-                resolve();
+                resolve(tileName);
                 return;
             }
             
             // If already loading, wait for existing promise
             if (this.tilesLoading[tileName]) {
-                this.tilesLoading[tileName].then(resolve).catch(reject);
+                this.tilesLoading[tileName].then(resolve);
                 return;
             }
             
             // Start loading the script
-            this.tilesLoading[tileName] = new Promise((scriptResolve, scriptReject) => {
+            this.tilesLoading[tileName] = new Promise((scriptResolve) => {
                 var script = document.createElement('script');
                 script.src = 'tiles/' + tileName + '.js';
                 script.onload = () => {
                     this.tilesLoaded[tileName] = true;
                     delete this.tilesLoading[tileName];
-                    scriptResolve();
+                    console.log('Loaded tile:', tileName);
+                    scriptResolve(tileName);
                 };
                 script.onerror = () => {
                     delete this.tilesLoading[tileName];
-                    scriptReject(new Error('Failed to load ' + tileName + '.js'));
+                    console.warn('Failed to load tile:', tileName + '.js', '- using MissingTile fallback');
+                    // Mark as 'missing' so we use MissingTile
+                    this.tilesLoaded[tileName] = 'missing';
+                    scriptResolve('MissingTile');
                 };
                 document.head.appendChild(script);
             });
             
-            this.tilesLoading[tileName].then(resolve).catch(reject);
+            this.tilesLoading[tileName].then(resolve);
         });
     },
     
@@ -94,21 +98,24 @@ var world = {
     },
 
     createObject: function(name, x, y) {
-        switch(name) {
-            case 'Bush':
-                return new Bush(x, y);
-            case 'Rock':
-                return new Rock(x, y);
-            case 'Water':
-                return new Water(x, y);
-            case 'Bridge':
-                return new Bridge(x, y);
-            case 'Grass':
-                return new Grass(x, y);
-            default:
-                console.warn('Unknown object type:', name);
-                return null;
+        // Check if tile failed to load
+        if (this.tilesLoaded[name] === 'missing') {
+            return new MissingTile(x, y, name);
         }
+        
+        // Try to create the object dynamically
+        try {
+            var constructor = window[name];
+            if (typeof constructor === 'function') {
+                return new constructor(x, y);
+            }
+        } catch (e) {
+            console.error('Error creating object:', name, e);
+        }
+        
+        // Fallback to MissingTile
+        console.warn('Unknown or failed object type:', name, '- using MissingTile');
+        return new MissingTile(x, y, name);
     },
 
     update: function(deltaTime) {

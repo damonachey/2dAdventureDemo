@@ -3,6 +3,7 @@
    3,    1, Rock
    4,    1, Water
    6,    1, Bridge
+   5,    2, NonExistent
    7,    1, Grass
    7,    2, Grass
    4,    2, Water
