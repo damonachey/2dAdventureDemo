@@ -32,7 +32,7 @@ var grid = {
             ctx.lineTo(xPos, canvas.height);
             ctx.stroke();
         }
-        
+
         // Draw horizontal lines (offset so (0,0) square aligns with world center)
         for (var y = 0; y <= rows; y++) {
             var yPos = y * this.squareSize + gridOffsetY;
@@ -43,32 +43,32 @@ var grid = {
         }
 
         // Draw coordinates (world coordinates with 0,0 at center)
-        for (var x = 0; x < cols; x++) {
-            for (var y = 0; y < rows; y++) {
+        for (var x = -1; x < cols; x++) {
+            for (var y = -1; y < rows; y++) {
                 var pixelX = x * this.squareSize + gridOffsetX + 2;
                 var pixelY = y * this.squareSize + gridOffsetY + 14;
-                
+
                 // Calculate world coordinates based on position relative to player
                 var worldX = Math.floor((pixelX - centerScreenX + state.player.x) / this.squareSize);
                 var worldY = Math.floor((centerScreenY - pixelY + state.player.y) / this.squareSize);
-                
+
                 ctx.fillText(worldX + ',' + worldY, pixelX, pixelY);
             }
         }
-        
+
         // Draw red X at world coordinates 0,0 for debugging (moves with world)
         var centerPixelX = canvas.width / 2 - state.player.x;
         var centerPixelY = canvas.height / 2 + state.player.y;
-        
+
         ctx.strokeStyle = 'red';
         ctx.lineWidth = 3;
-        
+
         // Draw X
         ctx.beginPath();
         ctx.moveTo(centerPixelX - 5, centerPixelY - 5);
         ctx.lineTo(centerPixelX + 5, centerPixelY + 5);
         ctx.stroke();
-        
+
         ctx.beginPath();
         ctx.moveTo(centerPixelX + 5, centerPixelY - 5);
         ctx.lineTo(centerPixelX - 5, centerPixelY + 5);
