@@ -24,6 +24,7 @@ function render() {
     player.render(ctx, canvas); // Render player
     grid.render(ctx, canvas); // Render grid overlay
     statistics.render(ctx, canvas); // Render statistics
+    help.render(ctx, canvas); // Render help overlay (on top)
 }
 
 function gameLoop(currentTime) {

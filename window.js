@@ -9,6 +9,7 @@ var keys = {};
 var pressedKeys = []; // Track all currently pressed keys for display
 var showBoundingBoxes = false; // Global bounding box toggle
 var currentDirection = null; // Track the currently active movement direction
+var showHelp = false; // Track help overlay visibility
 
 // Handle keyboard events
 window.addEventListener('keydown', function(e) {
@@ -71,6 +72,15 @@ window.addEventListener('keydown', function(e) {
     if (e.ctrlKey && e.key === 'b') {
         e.preventDefault();
         showBoundingBoxes = !showBoundingBoxes;
+    }
+    
+    // Handle '?' key to toggle help overlay
+    if (e.key === '?') {
+        e.preventDefault();
+        showHelp = !showHelp;
+    } else if (showHelp) {
+        // Hide help on any other keypress
+        showHelp = false;
     }
 });
 
@@ -139,6 +149,55 @@ window.addEventListener('blur', function() {
     pressedKeys = [];
     statistics.setCurrentKey('');
 });
+
+// Help overlay system
+var help = {
+    render: function(ctx, canvas) {
+        if (!showHelp) return;
+        
+        // Draw semi-transparent background
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Setup text styling
+        ctx.fillStyle = 'white';
+        ctx.font = '18px Arial';
+        ctx.textAlign = 'left';
+        
+        // Help content
+        var helpText = [
+            'GAME CONTROLS',
+            '',
+            'Movement:',
+            '  ↑↓←→  Arrow Keys - Move player',
+            '',
+            'Display Options:',
+            '  CTRL+S  Toggle statistics panel',
+            '  CTRL+G  Toggle coordinate grid',
+            '  CTRL+B  Toggle collision bounding boxes',
+            '',
+            'Help:',
+            '  ?       Show/hide this help screen',
+            '',
+            'Press any key to close this help screen'
+        ];
+        
+        // Calculate starting position (centered)
+        var startX = 50;
+        var startY = 100;
+        var lineHeight = 25;
+        
+        // Draw title with larger font
+        ctx.font = 'bold 24px Arial';
+        ctx.fillText(helpText[0], startX, startY);
+        
+        // Draw rest of text
+        ctx.font = '18px Arial';
+        for (var i = 1; i < helpText.length; i++) {
+            ctx.fillText(helpText[i], startX, startY + (i * lineHeight));
+        }
+    }
+};
 
 // Clear all keys when window regains focus (safety measure)
 window.addEventListener('focus', function() {
