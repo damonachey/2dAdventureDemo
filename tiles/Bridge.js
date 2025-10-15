@@ -9,7 +9,7 @@ Bridge.prototype.update = function(deltaTime) {
     // Bridge update logic goes here
 };
 
-Bridge.prototype.render = function(ctx, canvas) {
+Bridge.prototype.render = function(ctx, canvas, deltaTime) {
     // Convert world coordinates to screen coordinates
     var screenX = (canvas.width / 2) - state.player.x + this.x;
     var screenY = (canvas.height / 2) + state.player.y - this.y - this.height;

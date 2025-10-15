@@ -138,15 +138,15 @@ var world = {
         }
     },
 
-    render: function(ctx, canvas) {
+    render: function(ctx, canvas, deltaTime) {
         // Load map if not already loaded
         if (!this.loaded) {
             this.loadMap();
         }
-
+        
         // Render all world objects
         for (var i = 0; i < this.objects.length; i++) {
-            this.objects[i].render(ctx, canvas);
+            this.objects[i].render(ctx, canvas, deltaTime);
         }
     }
 };

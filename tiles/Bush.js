@@ -9,7 +9,7 @@ Bush.prototype.update = function(deltaTime) {
     // Bush update logic goes here
 };
 
-Bush.prototype.render = function(ctx, canvas) {
+Bush.prototype.render = function(ctx, canvas, deltaTime) {
     // Convert world coordinates to screen coordinates
     var screenX = (canvas.width / 2) - state.player.x + this.x;
     var screenY = (canvas.height / 2) + state.player.y - this.y - this.height;

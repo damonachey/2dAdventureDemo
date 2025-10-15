@@ -9,7 +9,7 @@ Grass.prototype.update = function(deltaTime) {
     // Grass update logic goes here
 };
 
-Grass.prototype.render = function(ctx, canvas) {
+Grass.prototype.render = function(ctx, canvas, deltaTime) {
     // Convert world coordinates to screen coordinates
     var screenX = (canvas.width / 2) - state.player.x + this.x;
     var screenY = (canvas.height / 2) + state.player.y - this.y - this.height;

@@ -2,7 +2,7 @@ var player = {
     width: 32,
     height: 32,
     
-    render: function(ctx, canvas) {
+    render: function(ctx, canvas, deltaTime) {
         // Player stays centered on screen (world moves around player)
         var screenX = (canvas.width / 2);
         var screenY = (canvas.height / 2) - this.height;

@@ -24,7 +24,7 @@ var statistics = {
         this.visible = !this.visible;
     },
 
-    render: function(ctx, canvas) {
+    render: function(ctx, canvas, deltaTime) {
         if (!this.visible) return;
 
         ctx.fillStyle = 'white';

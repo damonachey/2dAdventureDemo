@@ -14,17 +14,17 @@ function update(deltaTime) {
     statistics.update(deltaTime);
 }
 
-function render() {
+function render(deltaTime) {
     // Clear canvas
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Rendering code goes here
-    world.render(ctx, canvas); // Render world objects
-    player.render(ctx, canvas); // Render player
-    grid.render(ctx, canvas); // Render grid overlay
-    statistics.render(ctx, canvas); // Render statistics
-    help.render(ctx, canvas); // Render help overlay (on top)
+    world.render(ctx, canvas, deltaTime); // Render world objects
+    player.render(ctx, canvas, deltaTime); // Render player
+    grid.render(ctx, canvas, deltaTime); // Render grid overlay
+    statistics.render(ctx, canvas, deltaTime); // Render statistics
+    help.render(ctx, canvas, deltaTime); // Render help overlay (on top)
 }
 
 function gameLoop(currentTime) {
@@ -32,7 +32,7 @@ function gameLoop(currentTime) {
     lastTime = currentTime;
 
     update(deltaTime);
-    render();
+    render(deltaTime);
     requestAnimationFrame(gameLoop);
 }
 

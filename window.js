@@ -152,7 +152,7 @@ window.addEventListener('blur', function() {
 
 // Help overlay system
 var help = {
-    render: function(ctx, canvas) {
+    render: function(ctx, canvas, deltaTime) {
         if (!showHelp) return;
         
         // Draw semi-transparent background

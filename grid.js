@@ -6,7 +6,7 @@ var grid = {
         this.visible = !this.visible;
     },
 
-    render: function(ctx, canvas) {
+    render: function(ctx, canvas, deltaTime) {
         if (!this.visible) return;
 
         ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
