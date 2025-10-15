@@ -67,13 +67,61 @@ window.addEventListener('keyup', function(e) {
         keys[e.key] = false;
     }
     
-    // Remove key from pressed keys list
+    // Handle key removal - need to check both simple key and modifier combinations
     var keyName = e.key === ' ' ? 'Space' : e.key;
+    
+    // Remove simple key name
     var index = pressedKeys.indexOf(keyName);
     if (index > -1) {
         pressedKeys.splice(index, 1);
     }
     
+    // Remove any modifier combinations with this key
+    for (var i = pressedKeys.length - 1; i >= 0; i--) {
+        if (pressedKeys[i].endsWith('-' + keyName)) {
+            pressedKeys.splice(i, 1);
+        }
+    }
+    
+    // If a modifier key is released, remove all combinations with that modifier
+    if (keyName === 'Control' || keyName === 'Alt' || keyName === 'Shift' || keyName === 'Meta') {
+        var modifierPrefix = keyName === 'Control' ? 'CTRL-' : 
+                           keyName === 'Alt' ? 'ALT-' : 
+                           keyName === 'Shift' ? 'SHIFT-' : 'META-';
+        
+        for (var i = pressedKeys.length - 1; i >= 0; i--) {
+            if (pressedKeys[i].includes(modifierPrefix)) {
+                pressedKeys.splice(i, 1);
+            }
+        }
+    }
+    
     // Update statistics with remaining pressed keys
     statistics.setCurrentKey(pressedKeys.length > 0 ? pressedKeys.join(', ') : '');
+});
+
+// Clear all keys when window loses focus
+window.addEventListener('blur', function() {
+    // Clear movement keys
+    keys['ArrowUp'] = false;
+    keys['ArrowDown'] = false;
+    keys['ArrowLeft'] = false;
+    keys['ArrowRight'] = false;
+    
+    // Clear display keys
+    pressedKeys = [];
+    statistics.setCurrentKey('');
+});
+
+// Clear all keys when window regains focus (safety measure)
+window.addEventListener('focus', function() {
+    // Clear movement keys
+    keys['ArrowUp'] = false;
+    keys['ArrowDown'] = false;
+    keys['ArrowLeft'] = false;
+    keys['ArrowRight'] = false;
+    
+    // Clear display keys
+    pressedKeys = [];
+    statistics.setCurrentKey('');
 });
