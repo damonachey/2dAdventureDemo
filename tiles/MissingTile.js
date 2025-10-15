@@ -30,8 +30,8 @@ MissingTile.prototype.render = function(ctx, canvas) {
     ctx.lineTo(screenX + 8, screenY + 56);
     ctx.stroke();
 
-    // Draw bounding box if enabled
-    if (showBoundingBoxes) {
+    // Draw bounding box if enabled (but not for traversable objects)
+    if (showBoundingBoxes && !this.traversable) {
         ctx.strokeStyle = 'red';
         ctx.lineWidth = 1;
         ctx.strokeRect(screenX, screenY, this.width, this.height);

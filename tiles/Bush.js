@@ -57,8 +57,8 @@ Bush.prototype.render = function(ctx, canvas) {
     
     ctx.stroke();
     
-    // Draw bounding box if enabled
-    if (showBoundingBoxes) {
+    // Draw bounding box if enabled (but not for traversable objects)
+    if (showBoundingBoxes && !this.traversable) {
         ctx.strokeStyle = 'red';
         ctx.lineWidth = 1;
         ctx.strokeRect(screenX, screenY, this.width, this.height);

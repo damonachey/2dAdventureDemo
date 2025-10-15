@@ -46,8 +46,8 @@ Water.prototype.render = function(ctx, canvas) {
     ctx.quadraticCurveTo(screenX + 48, baseY - 20, screenX + 56, baseY - 16);
     ctx.stroke();
     
-    // Draw bounding box if enabled
-    if (showBoundingBoxes) {
+    // Draw bounding box if enabled (but not for traversable objects)
+    if (showBoundingBoxes && !this.traversable) {
         ctx.strokeStyle = 'red';
         ctx.lineWidth = 1;
         ctx.strokeRect(screenX, screenY, this.width, this.height);
