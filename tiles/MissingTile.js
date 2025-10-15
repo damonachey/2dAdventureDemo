@@ -30,11 +30,6 @@ MissingTile.prototype.render = function(ctx, canvas) {
     ctx.lineTo(screenX + 8, screenY + 56);
     ctx.stroke();
 
-    // Draw border around tile
-    ctx.strokeStyle = 'darkRed';
-    ctx.lineWidth = 2;
-    ctx.strokeRect(screenX, screenY, this.width, this.height);
-
     // Draw bounding box if enabled
     if (showBoundingBoxes) {
         ctx.strokeStyle = 'red';
