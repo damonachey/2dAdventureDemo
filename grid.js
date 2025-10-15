@@ -1,5 +1,5 @@
 var grid = {
-    visible: true,
+    visible: false,
     squareSize: 64,
 
     toggle: function() {
