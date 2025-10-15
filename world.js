@@ -46,6 +46,16 @@ var world = {
                 return new Bush(x, y);
             case 'Tree':
                 return new Tree(x, y);
+            case 'Rock':
+                return new Rock(x, y);
+            case 'Water':
+                return new Water(x, y);
+            case 'Pit':
+                return new Pit(x, y);
+            case 'Bridge':
+                return new Bridge(x, y);
+            case 'Grass':
+                return new Grass(x, y);
             default:
                 console.warn('Unknown object type:', name);
                 return null;
