@@ -13,23 +13,23 @@ Bridge.prototype.render = function(ctx, canvas) {
     // Convert world coordinates to screen coordinates
     var screenX = (canvas.width / 2) - state.player.x + this.x;
     var screenY = (canvas.height / 2) + state.player.y - this.y - this.height;
-    
+
     ctx.strokeStyle = 'brown';
     ctx.lineWidth = 3;
     ctx.lineCap = 'round';
-    
+
     var centerX = screenX + 32;
     var baseY = screenY + 64;
-    
+
     // Draw bridge planks (horizontal lines)
     ctx.beginPath();
     var plankY = baseY - 40;
     for (var i = 0; i < 5; i++) {
-        ctx.moveTo(screenX + 12, plankY + (i * 8));
-        ctx.lineTo(screenX + 52, plankY + (i * 8));
+        ctx.moveTo(screenX + 12, plankY + (i * 8 - 4));
+        ctx.lineTo(screenX + 52, plankY + (i * 8 - 4));
     }
     ctx.stroke();
-    
+
     // Draw bridge support posts
     ctx.lineWidth = 4;
     ctx.beginPath();
@@ -38,16 +38,7 @@ Bridge.prototype.render = function(ctx, canvas) {
     ctx.moveTo(screenX + 48, baseY - 8);
     ctx.lineTo(screenX + 48, baseY - 48);
     ctx.stroke();
-    
-    // Draw rope/cable supports
-    ctx.strokeStyle = 'darkBrown';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(screenX + 16, baseY - 48);
-    ctx.lineTo(centerX, baseY - 52);
-    ctx.lineTo(screenX + 48, baseY - 48);
-    ctx.stroke();
-    
+
     // Draw bounding box if enabled
     if (showBoundingBoxes) {
         ctx.strokeStyle = 'red';
