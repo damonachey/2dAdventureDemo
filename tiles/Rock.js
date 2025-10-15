@@ -19,28 +19,28 @@ Rock.prototype.render = function(ctx, canvas) {
     ctx.lineCap = 'round';
     
     var centerX = screenX + 32;
-    var baseY = screenY + 64;
+    var centerY = screenY + 32;
     
-    // Draw rock as irregular polygon outline
+    // Draw rock as irregular polygon outline (centered vertically)
     ctx.beginPath();
-    ctx.moveTo(screenX + 16, baseY - 8);
-    ctx.lineTo(screenX + 12, baseY - 24);
-    ctx.lineTo(screenX + 20, baseY - 40);
-    ctx.lineTo(screenX + 36, baseY - 44);
-    ctx.lineTo(screenX + 52, baseY - 36);
-    ctx.lineTo(screenX + 56, baseY - 20);
-    ctx.lineTo(screenX + 48, baseY - 8);
+    ctx.moveTo(screenX + 16, centerY + 18);
+    ctx.lineTo(screenX + 12, centerY + 2);
+    ctx.lineTo(screenX + 20, centerY - 14);
+    ctx.lineTo(screenX + 36, centerY - 18);
+    ctx.lineTo(screenX + 52, centerY - 10);
+    ctx.lineTo(screenX + 56, centerY + 6);
+    ctx.lineTo(screenX + 48, centerY + 18);
     ctx.closePath();
     ctx.stroke();
     
-    // Add some texture lines
+    // Add some texture lines (centered)
     ctx.beginPath();
-    ctx.moveTo(screenX + 20, baseY - 16);
-    ctx.lineTo(screenX + 28, baseY - 20);
-    ctx.moveTo(screenX + 32, baseY - 12);
-    ctx.lineTo(screenX + 40, baseY - 16);
-    ctx.moveTo(screenX + 24, baseY - 32);
-    ctx.lineTo(screenX + 32, baseY - 28);
+    ctx.moveTo(screenX + 20, centerY + 10);
+    ctx.lineTo(screenX + 28, centerY + 6);
+    ctx.moveTo(screenX + 32, centerY + 14);
+    ctx.lineTo(screenX + 40, centerY + 10);
+    ctx.moveTo(screenX + 24, centerY - 6);
+    ctx.lineTo(screenX + 32, centerY - 2);
     ctx.stroke();
     
     // Draw bounding box if enabled
