@@ -3,6 +3,7 @@ var statistics = {
     lastFpsTime: 0,
     currentFps: 0,
     currentKey: '',
+    visible: true,
     
     update: function(deltaTime) {
         this.frameCount++;
@@ -19,7 +20,13 @@ var statistics = {
         this.currentKey = key;
     },
     
+    toggle: function() {
+        this.visible = !this.visible;
+    },
+    
     render: function(ctx, canvas) {
+        if (!this.visible) return;
+        
         ctx.fillStyle = 'white';
         ctx.font = '20px Arial';
         ctx.textAlign = 'left';

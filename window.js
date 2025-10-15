@@ -29,6 +29,12 @@ window.addEventListener('keydown', function(e) {
         
         statistics.setCurrentKey(keyName);
     }
+    
+    // Handle CTRL+s to toggle statistics
+    if (e.ctrlKey && e.key === 's') {
+        e.preventDefault();
+        statistics.toggle();
+    }
 });
 
 window.addEventListener('keyup', function(e) {
