@@ -35,6 +35,12 @@ window.addEventListener('keydown', function(e) {
         e.preventDefault();
         statistics.toggle();
     }
+    
+    // Handle CTRL+g to toggle grid
+    if (e.ctrlKey && e.key === 'g') {
+        e.preventDefault();
+        grid.toggle();
+    }
 });
 
 window.addEventListener('keyup', function(e) {

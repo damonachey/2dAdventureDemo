@@ -9,6 +9,7 @@ var lastTime = 0;
 
 function update(deltaTime) {
     // Game logic updates go here
+    state.update(deltaTime);
     statistics.update(deltaTime);
 }
 
@@ -18,7 +19,10 @@ function render() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Rendering code goes here
-
+    
+    // Render grid overlay
+    grid.render(ctx, canvas);
+    
     // Render FPS counter
     statistics.render(ctx, canvas);
 }
