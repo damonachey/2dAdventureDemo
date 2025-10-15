@@ -20,6 +20,9 @@ function render() {
 
     // Rendering code goes here
     
+    // Render player
+    player.render(ctx, canvas);
+    
     // Render grid overlay
     grid.render(ctx, canvas);
     
