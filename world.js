@@ -52,6 +52,7 @@ var world = {
                 var lines = data.split('\n');
                 var uniqueTiles = new Set();
                 var objectsToCreate = [];
+                var occupiedPositions = new Map(); // Track occupied positions
                 
                 // First pass: collect unique tile types and object data
                 for (var i = 0; i < lines.length; i++) {
@@ -67,6 +68,16 @@ var world = {
                         var y = parseInt(parts[1].trim()) * 64; // Convert grid to pixels
                         var objectName = parts[2].trim();
                         var traversable = parts.length > 3 && parts[3].trim().toLowerCase() === 'traversable';
+                        
+                        // Check for duplicate positions
+                        var positionKey = x + ',' + y;
+                        if (occupiedPositions.has(positionKey)) {
+                            var existingTile = occupiedPositions.get(positionKey);
+                            console.warn('Duplicate tile position detected at (' + 
+                                (x/64) + ',' + (y/64) + '): "' + existingTile + '" and "' + objectName + '"');
+                        } else {
+                            occupiedPositions.set(positionKey, objectName);
+                        }
                         
                         uniqueTiles.add(objectName);
                         objectsToCreate.push({ x: x, y: y, name: objectName, traversable: traversable });

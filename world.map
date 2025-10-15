@@ -2,7 +2,6 @@
 # 20x20 map centered around zero (-10 to +9 in both directions)
 
 # Bush perimeter - Top edge
-  -10,   9, Bush
    -9,   9, Bush
    -8,   9, Bush
    -7,   9, Bush
@@ -21,7 +20,6 @@
     6,   9, Bush
     7,   9, Bush
     8,   9, Bush
-    9,   9, Bush
 
 # Bush perimeter - Bottom edge
   -10,   -9, Bush
