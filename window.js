@@ -9,7 +9,7 @@ var keys = {};
 var pressedKeys = []; // Track all currently pressed keys for display
 var showBoundingBoxes = false; // Global bounding box toggle
 var currentDirection = null; // Track the currently active movement direction
-var showHelp = false; // Track help overlay visibility
+var showHelp = true; // Track help overlay visibility
 
 // Handle keyboard events
 window.addEventListener('keydown', function(e) {
@@ -40,7 +40,7 @@ window.addEventListener('keydown', function(e) {
     // Track arrow keys for movement with direction priority
     if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         keys[e.key] = true;
-        
+
         // Set direction if no current direction is active
         if (currentDirection === null) {
             currentDirection = e.key;
@@ -73,7 +73,7 @@ window.addEventListener('keydown', function(e) {
         e.preventDefault();
         showBoundingBoxes = !showBoundingBoxes;
     }
-    
+
     // Handle '?' key to toggle help overlay
     if (e.key === '?') {
         e.preventDefault();
@@ -88,11 +88,11 @@ window.addEventListener('keyup', function(e) {
     // Release arrow keys
     if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         keys[e.key] = false;
-        
+
         // If the released key was the current direction, find next pressed direction
         if (currentDirection === e.key) {
             currentDirection = null;
-            
+
             // Check for other pressed arrow keys to become the new current direction
             if (keys['ArrowUp']) currentDirection = 'ArrowUp';
             else if (keys['ArrowDown']) currentDirection = 'ArrowDown';
@@ -141,10 +141,10 @@ window.addEventListener('blur', function() {
     keys['ArrowDown'] = false;
     keys['ArrowLeft'] = false;
     keys['ArrowRight'] = false;
-    
+
     // Clear current direction
     currentDirection = null;
-    
+
     // Clear display keys
     pressedKeys = [];
     statistics.setCurrentKey('');
@@ -154,16 +154,16 @@ window.addEventListener('blur', function() {
 var help = {
     render: function(ctx, canvas, deltaTime) {
         if (!showHelp) return;
-        
+
         // Draw semi-transparent background
         ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
+
         // Setup text styling
         ctx.fillStyle = 'white';
         ctx.font = '18px Arial';
         ctx.textAlign = 'left';
-        
+
         // Help content
         var helpText = [
             'GAME CONTROLS',
@@ -181,16 +181,16 @@ var help = {
             '',
             'Press any key to close this help screen'
         ];
-        
+
         // Calculate starting position (centered)
         var startX = 50;
         var startY = 100;
         var lineHeight = 25;
-        
+
         // Draw title with larger font
         ctx.font = 'bold 24px Arial';
         ctx.fillText(helpText[0], startX, startY);
-        
+
         // Draw rest of text
         ctx.font = '18px Arial';
         for (var i = 1; i < helpText.length; i++) {
@@ -206,10 +206,10 @@ window.addEventListener('focus', function() {
     keys['ArrowDown'] = false;
     keys['ArrowLeft'] = false;
     keys['ArrowRight'] = false;
-    
+
     // Clear current direction
     currentDirection = null;
-    
+
     // Clear display keys
     pressedKeys = [];
     statistics.setCurrentKey('');
